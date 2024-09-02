@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:blog_nest/core/error/exceptions.dart';
 import 'package:blog_nest/core/error/failures.dart';
 import 'package:blog_nest/features/blog/data/data_sources/blog_remote_data_sources.dart';
@@ -36,6 +35,16 @@ class BlogRepositoryImpl implements BlogRepository {
 
       final uploadedBlog = await _blogRemoteDataSources.uploadBlog(blogModel);
       return right(uploadedBlog);
+    } on ServerException catch (e) {
+      return left(Failure(message: e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Blog>>> getAllBlogs() async {
+    try {
+      final blogs = await _blogRemoteDataSources.getAllBlogs();
+      return right(blogs);
     } on ServerException catch (e) {
       return left(Failure(message: e.message));
     }

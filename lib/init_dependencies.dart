@@ -11,6 +11,7 @@ import 'package:blog_nest/features/blog/bloc/blog_bloc.dart';
 import 'package:blog_nest/features/blog/data/data_sources/blog_remote_data_sources.dart';
 import 'package:blog_nest/features/blog/data/repository/blog_repository_impl.dart';
 import 'package:blog_nest/features/blog/domain/repository/blog_repository.dart';
+import 'package:blog_nest/features/blog/domain/usecases/get_blog.dart';
 import 'package:blog_nest/features/blog/domain/usecases/upload_blog.dart';
 import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -49,5 +50,6 @@ void _initBlog() {
     ..registerFactory<BlogRepository>(
         () => BlogRepositoryImpl(blogRemoteDataSources: serviceLocator()))
     ..registerFactory(() => UploadBlog(blogRepository: serviceLocator()))
-    ..registerLazySingleton(() => BlogBloc(serviceLocator()));
+    ..registerFactory(() => GetAllBlogs(blogRepository: serviceLocator()))
+    ..registerLazySingleton(() => BlogBloc(serviceLocator(), serviceLocator()));
 }

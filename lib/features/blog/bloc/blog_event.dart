@@ -17,3 +17,5 @@ class BlogUpload extends BlogEvent {
       required this.posterId,
       required this.topics});
 }
+
+class BlogFetchAll extends BlogEvent{}
