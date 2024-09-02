@@ -1,5 +1,17 @@
+import 'package:blog_nest/core/error/failures.dart';
+import 'package:blog_nest/core/common/entities/user.dart';
+import 'package:fpdart/fpdart.dart';
+
 abstract interface class AuthRepository {
-  signupWithEmailPassword(
-      {required String name, required String email, required String password});
-  loginWithEmailPassword({required String email, required String password});
+  Future<Either<Failure, User>> signUpWithEmailPassword({
+    required name,
+    required email,
+    required password,
+  });
+  Future<Either<Failure, User>> loginWithEmailPassword({
+    required email,
+    required password,
+  });
+
+  Future<Either<Failure, User>> currentUser();
 }
