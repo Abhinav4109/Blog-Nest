@@ -72,7 +72,7 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
           if (state is BlogFailure) {
             showSnackBar(context, state.error);
           } else if (state is BlogUploadSuccess) {
-            context.go(BlogPage.routeName);
+            context.goNamed(BlogPage.routeName);
           }
         },
         builder: (context, state) {
