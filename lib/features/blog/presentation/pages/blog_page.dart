@@ -2,7 +2,6 @@ import 'package:blog_nest/core/common/widgets/loader.dart';
 import 'package:blog_nest/core/common/widgets/snackbar.dart';
 import 'package:blog_nest/core/theme/app_pallete.dart';
 import 'package:blog_nest/features/blog/bloc/blog_bloc.dart';
-import 'package:blog_nest/features/blog/domain/entities/blog.dart';
 import 'package:blog_nest/features/blog/presentation/pages/add_new_blog_page.dart';
 import 'package:blog_nest/features/blog/presentation/pages/blog_view_page.dart';
 import 'package:blog_nest/features/blog/presentation/widgets/blog_card.dart';
@@ -53,9 +52,13 @@ class _BlogPageState extends State<BlogPage> {
               itemBuilder: (context, index) {
                 final blog = state.blogs[index];
                 return GestureDetector(
-                  onTap: () => context.pushNamed(BlogViewPage.routeName, extra: blog),
-                  child: BlogCard(blog: blog, color: index % 2 == 0 ? AppPallete.gradient1 : AppPallete.gradient2)
-                  );
+                    onTap: () =>
+                        context.pushNamed(BlogViewPage.routeName, extra: blog),
+                    child: BlogCard(
+                        blog: blog,
+                        color: index % 2 == 0
+                            ? AppPallete.gradient1
+                            : AppPallete.gradient2));
               });
         }
         return const SizedBox();
